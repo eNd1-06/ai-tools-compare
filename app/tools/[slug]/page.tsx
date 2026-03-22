@@ -131,6 +131,43 @@ export default async function ToolPage({ params }: Props) {
           )}
         </div>
 
+        {/* こんな人におすすめ */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+          <h2 className="font-semibold text-gray-900 mb-3">こんな人におすすめ</h2>
+          <ul className="space-y-2">
+            {tool.recommendedFor.map((item) => (
+              <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
+                <span className="text-green-500 font-bold">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 日本語対応スコア */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+          <h2 className="font-semibold text-gray-900 mb-3">日本語対応スコア</h2>
+          <div className="flex items-center gap-3">
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`text-2xl ${star <= tool.japaneseScore ? "text-yellow-400" : "text-gray-200"}`}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+            <span className="text-sm text-gray-500">
+              {tool.japaneseScore === 5 && "完全対応（UI・出力ともに高品質）"}
+              {tool.japaneseScore === 4 && "ほぼ対応（日本語出力は良好）"}
+              {tool.japaneseScore === 3 && "部分対応（日本語は使えるが品質にムラあり）"}
+              {tool.japaneseScore === 2 && "限定的（基本的に英語UI）"}
+              {tool.japaneseScore === 1 && "非対応"}
+            </span>
+          </div>
+        </div>
+
         {/* タグ */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="font-semibold text-gray-900 mb-3">関連キーワード</h2>
