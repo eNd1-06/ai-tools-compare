@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { categories, getToolsByCategory, type Category } from "@/data/tools";
+import { categoryDetails } from "@/data/category-details";
 
 type Props = { params: Promise<{ category: string }> };
 
@@ -28,6 +29,7 @@ export default async function CategoryComparePage({ params }: Props) {
   const freeTools = categoryTools.filter((t) => t.hasFree);
   const japaneseTools = categoryTools.filter((t) => t.japaneseSupport);
   const apiTools = categoryTools.filter((t) => t.hasAPI);
+  const detail = categoryDetails[category as Category];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -46,6 +48,40 @@ export default async function CategoryComparePage({ params }: Props) {
         <p className="text-gray-500 mb-8">
           {categoryTools.length}件の{cat.name}AIツールを料金・機能・日本語対応で比較しています。
         </p>
+
+        {/* カテゴリ解説 */}
+        {detail && (
+          <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <div className="prose prose-sm max-w-none text-gray-600 leading-relaxed whitespace-pre-line mb-6">
+              {detail.intro}
+            </div>
+            <h2 className="font-semibold text-gray-900 mb-4">{cat.name}AIツールの選び方</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {detail.points.map((point, i) => (
+                <div key={i} className="bg-gray-50 rounded-lg p-4">
+                  <div className="font-medium text-gray-900 text-sm mb-2">
+                    {i + 1}. {point.title}
+                  </div>
+                  <p className="text-xs text-gray-600 leading-relaxed">{point.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 活用シーン */}
+        {detail && (
+          <div className="bg-white rounded-xl border border-gray-200 p-5 mb-8">
+            <h2 className="font-semibold text-gray-900 mb-3">主な活用シーン</h2>
+            <div className="flex flex-wrap gap-2">
+              {detail.useCases.map((useCase) => (
+                <span key={useCase} className="text-sm bg-blue-50 text-blue-700 px-3 py-1 rounded-full">
+                  {useCase}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* サマリー */}
         <div className="grid grid-cols-3 gap-4 mb-8">
