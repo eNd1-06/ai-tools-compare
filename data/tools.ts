@@ -28,6 +28,7 @@ export type AITool = {
   targetUser: ("personal" | "business")[];
   recommendedFor: string[]; // こんな人におすすめ
   url: string;
+  affiliateUrl?: string;
   logoUrl: string | null;
   tags: string[];
 };
@@ -618,6 +619,27 @@ export const tools: AITool[] = [
     url: "https://n8n.io",
     logoUrl: null,
     tags: ["自動化", "オープンソース", "セルフホスト", "ワークフロー", "Zapier代替"],
+  },
+  {
+    slug: "value-ai-writer",
+    name: "Value AI Writer by GMO",
+    description: "GMOが提供する日本語SEO記事生成AIツール。SEOに強い高品質な日本語記事を自動生成できる。国産ツールのため日本語品質が高く、ビジネス利用に最適。",
+    categories: ["text"],
+    hasFree: false,
+    freeLimit: null,
+    plans: [
+      { name: "スタンダード", price: 2980, currency: "JPY", billingCycle: "monthly" },
+      { name: "プロ", price: 9800, currency: "JPY", billingCycle: "monthly" },
+    ],
+    japaneseSupport: true,
+    japaneseScore: 5,
+    hasAPI: false,
+    targetUser: ["personal", "business"],
+    recommendedFor: ["SEO記事を大量に作りたい人", "日本語品質にこだわるコンテンツ担当者", "国産AIツールを使いたい人"],
+    url: "https://www.value-domain.com/value-aiwriter/",
+    affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSF+ECSAMY+1JUK+1HL85U",
+    logoUrl: null,
+    tags: ["SEO", "記事生成", "国産AI", "ブログ", "コンテンツマーケティング"],
   },
   {
     slug: "character-ai",

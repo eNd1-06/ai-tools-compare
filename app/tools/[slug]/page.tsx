@@ -81,9 +81,9 @@ export default async function ToolPage({ params }: Props) {
               </div>
             </div>
             <a
-              href={tool.url}
+              href={tool.affiliateUrl ?? tool.url}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noopener noreferrer"
               className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
             >
               公式サイトへ →
