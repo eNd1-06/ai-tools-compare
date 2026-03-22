@@ -139,6 +139,13 @@ export default function Home() {
           })}
         </div>
       </main>
+
+      <footer className="border-t border-gray-200 bg-white mt-12">
+        <div className="max-w-6xl mx-auto px-4 py-6 flex gap-6 text-sm text-gray-500">
+          <Link href="/about" className="hover:text-gray-700">このサイトについて</Link>
+          <span>© {new Date().getFullYear()} AIツール比較サイト</span>
+        </div>
+      </footer>
     </div>
   );
 }
