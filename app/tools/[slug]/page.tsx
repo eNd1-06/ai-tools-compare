@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { tools, categories, getToolBySlug } from "@/data/tools";
 import { toolFaqs } from "@/data/faqs";
+import { toolAlternatives } from "@/data/alternatives";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -28,6 +29,10 @@ export default async function ToolPage({ params }: Props) {
   const freePlan = tool.plans.find((p) => p.price === 0);
   const paidPlans = tool.plans.filter((p) => p.price !== 0);
   const faqs = toolFaqs[tool.slug] ?? [];
+  const alternativeSlugs = toolAlternatives[tool.slug] ?? [];
+  const alternativeTools = alternativeSlugs
+    .map((slug) => tools.find((t) => t.slug === slug))
+    .filter(Boolean);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -169,6 +174,35 @@ export default async function ToolPage({ params }: Props) {
             </span>
           </div>
         </div>
+
+        {/* 代替ツール */}
+        {alternativeTools.length > 0 && (
+          <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+            <h2 className="font-semibold text-gray-900 mb-4">{tool.name}の代替ツール</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {alternativeTools.map((alt) => {
+                if (!alt) return null;
+                return (
+                  <Link
+                    key={alt.slug}
+                    href={`/tools/${alt.slug}`}
+                    className="flex items-start gap-3 p-3 rounded-lg border border-gray-100 hover:border-blue-200 hover:bg-blue-50 transition-colors"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-gray-900 text-sm">{alt.name}</div>
+                      <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{alt.description}</p>
+                    </div>
+                    {alt.hasFree && (
+                      <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full shrink-0">
+                        無料あり
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* FAQ */}
         {faqs.length > 0 && (
