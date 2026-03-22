@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { tools, categories, getToolBySlug } from "@/data/tools";
+import { toolFaqs } from "@/data/faqs";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -26,6 +27,7 @@ export default async function ToolPage({ params }: Props) {
 
   const freePlan = tool.plans.find((p) => p.price === 0);
   const paidPlans = tool.plans.filter((p) => p.price !== 0);
+  const faqs = toolFaqs[tool.slug] ?? [];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -167,6 +169,21 @@ export default async function ToolPage({ params }: Props) {
             </span>
           </div>
         </div>
+
+        {/* FAQ */}
+        {faqs.length > 0 && (
+          <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+            <h2 className="font-semibold text-gray-900 mb-4">よくある質問</h2>
+            <div className="space-y-4">
+              {faqs.map((faq, i) => (
+                <div key={i} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
+                  <p className="font-medium text-gray-900 text-sm mb-1">Q. {faq.q}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">A. {faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* タグ */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">
