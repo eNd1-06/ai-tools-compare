@@ -1,0 +1,148 @@
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { tools, categories, getToolBySlug } from "@/data/tools";
+
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateStaticParams() {
+  return tools.map((tool) => ({ slug: tool.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const tool = getToolBySlug(slug);
+  if (!tool) return {};
+  return {
+    title: `${tool.name}の料金・機能・評判 | AIツール比較`,
+    description: tool.description,
+  };
+}
+
+export default async function ToolPage({ params }: Props) {
+  const { slug } = await params;
+  const tool = getToolBySlug(slug);
+  if (!tool) notFound();
+
+  const freePlan = tool.plans.find((p) => p.price === 0);
+  const paidPlans = tool.plans.filter((p) => p.price !== 0);
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          <Link href="/" className="text-sm text-blue-600 hover:underline">
+            ← ツール一覧に戻る
+          </Link>
+        </div>
+      </header>
+
+      <main className="max-w-4xl mx-auto px-4 py-8">
+        {/* ヘッダー */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+          <div className="flex items-start justify-between mb-4">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">{tool.name}</h1>
+              <div className="flex flex-wrap gap-2">
+                {tool.categories.map((cat) => {
+                  const catData = categories.find((c) => c.slug === cat);
+                  return (
+                    <span key={cat} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                      {catData?.name}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+            <a
+              href={tool.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
+              公式サイトへ →
+            </a>
+          </div>
+          <p className="text-gray-600">{tool.description}</p>
+        </div>
+
+        {/* 基本情報 */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+          <h2 className="font-semibold text-gray-900 mb-4">基本情報</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center p-4 bg-gray-50 rounded-lg">
+              <div className="text-2xl mb-1">{tool.hasFree ? "✅" : "❌"}</div>
+              <div className="text-xs text-gray-500">無料プラン</div>
+            </div>
+            <div className="text-center p-4 bg-gray-50 rounded-lg">
+              <div className="text-2xl mb-1">{tool.japaneseSupport ? "✅" : "❌"}</div>
+              <div className="text-xs text-gray-500">日本語対応</div>
+            </div>
+            <div className="text-center p-4 bg-gray-50 rounded-lg">
+              <div className="text-2xl mb-1">{tool.hasAPI ? "✅" : "❌"}</div>
+              <div className="text-xs text-gray-500">API提供</div>
+            </div>
+            <div className="text-center p-4 bg-gray-50 rounded-lg">
+              <div className="text-sm font-medium text-gray-700 mb-1">
+                {tool.targetUser.includes("personal") && tool.targetUser.includes("business")
+                  ? "個人・法人"
+                  : tool.targetUser.includes("business")
+                  ? "法人向け"
+                  : "個人向け"}
+              </div>
+              <div className="text-xs text-gray-500">対象ユーザー</div>
+            </div>
+          </div>
+        </div>
+
+        {/* 料金プラン */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+          <h2 className="font-semibold text-gray-900 mb-4">料金プラン</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {tool.plans.map((plan) => (
+              <div
+                key={plan.name}
+                className={`border rounded-lg p-4 ${
+                  plan.price === 0
+                    ? "border-green-200 bg-green-50"
+                    : "border-gray-200"
+                }`}
+              >
+                <div className="font-medium text-gray-900 mb-1">{plan.name}</div>
+                <div className="text-xl font-bold text-gray-900">
+                  {plan.price === 0
+                    ? "無料"
+                    : plan.price === null
+                    ? "要問い合わせ"
+                    : `$${plan.price}`}
+                  {plan.price !== null && plan.price > 0 && (
+                    <span className="text-sm font-normal text-gray-500">
+                      /{plan.billingCycle === "monthly" ? "月" : "年"}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          {tool.hasFree && tool.freeLimit && (
+            <p className="text-sm text-gray-500 mt-3">
+              ※ 無料プランの制限: {tool.freeLimit}
+            </p>
+          )}
+        </div>
+
+        {/* タグ */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="font-semibold text-gray-900 mb-3">関連キーワード</h2>
+          <div className="flex flex-wrap gap-2">
+            {tool.tags.map((tag) => (
+              <span key={tag} className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}

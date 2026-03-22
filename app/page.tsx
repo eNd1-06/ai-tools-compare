@@ -1,63 +1,142 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { tools, categories, type Category } from "@/data/tools";
 
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState<Category | "all">("all");
+  const [freeOnly, setFreeOnly] = useState(false);
+  const [japaneseOnly, setJapaneseOnly] = useState(false);
+
+  const filtered = tools.filter((tool) => {
+    if (selectedCategory !== "all" && !tool.categories.includes(selectedCategory)) return false;
+    if (freeOnly && !tool.hasFree) return false;
+    if (japaneseOnly && !tool.japaneseSupport) return false;
+    return true;
+  });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <h1 className="text-2xl font-bold text-gray-900">AIツール比較サイト</h1>
+          <p className="text-gray-500 mt-1 text-sm">
+            {tools.length}件のAIツールを用途・価格・機能で比較できます
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        {/* フィルター */}
+        <div className="bg-white rounded-xl border border-gray-200 p-4 mb-6">
+          <div className="flex flex-wrap gap-4 items-center">
+            {/* カテゴリ */}
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setSelectedCategory("all")}
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  selectedCategory === "all"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                すべて
+              </button>
+              {categories.map((cat) => (
+                <button
+                  key={cat.slug}
+                  onClick={() => setSelectedCategory(cat.slug)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    selectedCategory === cat.slug
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  {cat.name}
+                </button>
+              ))}
+            </div>
+
+            {/* チェックボックスフィルター */}
+            <div className="flex gap-4 ml-auto">
+              <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={freeOnly}
+                  onChange={(e) => setFreeOnly(e.target.checked)}
+                  className="rounded"
+                />
+                無料プランあり
+              </label>
+              <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={japaneseOnly}
+                  onChange={(e) => setJapaneseOnly(e.target.checked)}
+                  className="rounded"
+                />
+                日本語対応
+              </label>
+            </div>
+          </div>
+        </div>
+
+        {/* ツール一覧 */}
+        <p className="text-sm text-gray-500 mb-4">{filtered.length}件</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filtered.map((tool) => {
+            const minPrice = tool.plans
+              .filter((p) => p.price !== null && p.price > 0)
+              .sort((a, b) => (a.price ?? 0) - (b.price ?? 0))[0];
+
+            return (
+              <Link
+                key={tool.slug}
+                href={`/tools/${tool.slug}`}
+                className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h2 className="font-semibold text-gray-900">{tool.name}</h2>
+                  <div className="flex gap-1">
+                    {tool.hasFree && (
+                      <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                        無料あり
+                      </span>
+                    )}
+                    {tool.japaneseSupport && (
+                      <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
+                        日本語
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <p className="text-sm text-gray-500 mb-3 line-clamp-2">{tool.description}</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-1 flex-wrap">
+                    {tool.categories.map((cat) => {
+                      const catData = categories.find((c) => c.slug === cat);
+                      return (
+                        <span
+                          key={cat}
+                          className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded"
+                        >
+                          {catData?.name}
+                        </span>
+                      );
+                    })}
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    {tool.hasFree && minPrice === undefined
+                      ? "無料"
+                      : minPrice
+                      ? `$${minPrice.price}/月〜`
+                      : "要問い合わせ"}
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </main>
     </div>
