@@ -11,13 +11,33 @@ export async function generateStaticParams() {
   return tools.map((tool) => ({ slug: tool.slug }));
 }
 
+const BASE_URL = "https://ai-tools-compare-ten.vercel.app";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tool = getToolBySlug(slug);
   if (!tool) return {};
+  const title = `${tool.name}の料金・機能・評判 | AIツール比較`;
+  const url = `${BASE_URL}/tools/${slug}`;
   return {
-    title: `${tool.name}の料金・機能・評判 | AIツール比較`,
+    title,
     description: tool.description,
+    openGraph: {
+      type: "article",
+      locale: "ja_JP",
+      url,
+      siteName: "AIツール比較サイト",
+      title,
+      description: tool.description,
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description: tool.description,
+    },
+    alternates: {
+      canonical: url,
+    },
   };
 }
 
@@ -140,7 +160,7 @@ export default async function ToolPage({ params }: Props) {
                     ? "無料"
                     : plan.price === null
                     ? "要問い合わせ"
-                    : `$${plan.price}`}
+                    : `${plan.currency === "JPY" ? "¥" : "$"}${plan.price?.toLocaleString()}`}
                   {plan.price !== null && plan.price > 0 && (
                     <span className="text-sm font-normal text-gray-500">
                       /{plan.billingCycle === "monthly" ? "月" : "年"}

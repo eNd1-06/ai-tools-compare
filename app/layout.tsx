@@ -12,11 +12,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const BASE_URL = "https://ai-tools-compare-ten.vercel.app";
+
 export const metadata: Metadata = {
   title: "AIツール比較サイト",
   description: "ChatGPT、Claude、Geminiなど人気AIツールを徹底比較。用途別・カテゴリ別に最適なAIツールが見つかります。",
   verification: {
     google: "X6orpG-UcJpIZWQ8kOvac6XrXv7_GocQWCtvzKjtPw0",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    url: BASE_URL,
+    siteName: "AIツール比較サイト",
+    title: "AIツール比較サイト",
+    description: "ChatGPT、Claude、Geminiなど人気AIツールを徹底比較。用途別・カテゴリ別に最適なAIツールが見つかります。",
+  },
+  twitter: {
+    card: "summary",
+    title: "AIツール比較サイト",
+    description: "ChatGPT、Claude、Geminiなど人気AIツールを徹底比較。用途別・カテゴリ別に最適なAIツールが見つかります。",
+  },
+  alternates: {
+    canonical: BASE_URL,
   },
 };
 
