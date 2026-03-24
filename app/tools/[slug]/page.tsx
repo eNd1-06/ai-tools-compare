@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { tools, categories, getToolBySlug } from "@/data/tools";
 import { toolFaqs } from "@/data/faqs";
 import { toolAlternatives } from "@/data/alternatives";
+import { CompareButton } from "@/components/CompareButton";
+import { AdSlot } from "@/components/AdSlot";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -67,8 +69,19 @@ export default async function ToolPage({ params }: Props) {
     })),
   } : null;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": BASE_URL },
+      { "@type": "ListItem", "position": 2, "name": "AIツール一覧", "item": BASE_URL },
+      { "@type": "ListItem", "position": 3, "name": tool.name, "item": `${BASE_URL}/tools/${tool.slug}` },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {faqSchema && (
         <script
           type="application/ld+json"
@@ -129,10 +142,11 @@ export default async function ToolPage({ params }: Props) {
               href={tool.affiliateUrl ?? tool.url}
               target="_blank"
               rel="nofollow noopener noreferrer"
-              className="block w-full text-center bg-blue-600 text-white px-6 py-3.5 rounded-xl font-semibold text-base hover:bg-blue-700 transition-colors shadow-sm"
+              className="block w-full text-center bg-blue-600 text-white px-6 py-3.5 rounded-xl font-semibold text-base hover:bg-blue-700 transition-colors shadow-sm mb-3"
             >
               {tool.name}の公式サイトを見る →
             </a>
+            <CompareButton slug={tool.slug} name={tool.name} />
           </div>
         </div>
 
@@ -229,6 +243,8 @@ export default async function ToolPage({ params }: Props) {
             </span>
           </div>
         </div>
+
+        <AdSlot slot="auto" />
 
         {/* 代替ツール */}
         {alternativeTools.length > 0 && (

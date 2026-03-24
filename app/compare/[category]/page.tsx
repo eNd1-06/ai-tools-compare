@@ -28,8 +28,19 @@ export default async function CategoryComparePage({ params }: Props) {
   const categoryTools = getToolsByCategory(category as Category);
   const detail = categoryDetails[category as Category];
 
+  const BASE_URL = "https://ai-tools-compare-ten.vercel.app";
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": BASE_URL },
+      { "@type": "ListItem", "position": 2, "name": `${cat.name}AIツール比較`, "item": `${BASE_URL}/compare/${category}` },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <header className="bg-gradient-to-br from-blue-600 to-blue-800 text-white">
         <div className="max-w-5xl mx-auto px-4 py-3">
           <nav className="text-sm text-blue-200 flex items-center gap-1 flex-wrap">

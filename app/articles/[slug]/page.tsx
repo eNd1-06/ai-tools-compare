@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { articles } from "@/data/articles";
 import { tools } from "@/data/tools";
+import { AdSlot } from "@/components/AdSlot";
 
 const BASE_URL = "https://ai-tools-compare-ten.vercel.app";
 
@@ -63,6 +64,8 @@ export default async function ArticlePage({ params }: Props) {
             </div>
           ))}
         </div>
+
+        <AdSlot slot="auto" />
 
         {/* 関連ツール */}
         {relatedTools.length > 0 && (

@@ -196,7 +196,12 @@ export default function Home() {
                   className={`bg-white rounded-t-xl border border-b-0 p-5 hover:shadow-md transition-all flex-1 ${inCompare ? "border-blue-400" : "border-gray-200 hover:border-blue-200"}`}
                 >
                   <div className="flex items-start justify-between mb-2">
-                    <h2 className="font-semibold text-gray-900 leading-tight">{tool.name}</h2>
+                    <div className="flex items-center gap-1.5">
+                      <h2 className="font-semibold text-gray-900 leading-tight">{tool.name}</h2>
+                      {tool.isNew && (
+                        <span className="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded font-bold leading-none">NEW</span>
+                      )}
+                    </div>
                     <div className="flex gap-1 flex-shrink-0 ml-2">
                       {tool.hasFree && (
                         <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full whitespace-nowrap">

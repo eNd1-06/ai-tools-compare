@@ -31,6 +31,7 @@ export type AITool = {
   affiliateUrl?: string;
   logoUrl: string | null;
   tags: string[];
+  isNew?: boolean;
 };
 
 export const categories: { slug: Category; name: string }[] = [
@@ -825,6 +826,7 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSG+UYL0A+5988+5ZEMQ",
     logoUrl: null,
     tags: ["文字起こし", "議事録", "音声認識", "Zoom", "自動化"],
+    isNew: true,
   },
   {
     slug: "character-ai",
@@ -866,6 +868,7 @@ export const tools: AITool[] = [
     url: "https://leonardo.ai",
     logoUrl: null,
     tags: ["画像生成", "ゲームアセット", "イラスト", "商用利用", "クリエイター"],
+    isNew: true,
   },
   {
     slug: "ideogram",
@@ -887,6 +890,7 @@ export const tools: AITool[] = [
     url: "https://ideogram.ai",
     logoUrl: null,
     tags: ["画像生成", "テキスト入り画像", "ロゴ", "SNS", "タイポグラフィ"],
+    isNew: true,
   },
   {
     slug: "bing-image-creator",
@@ -906,6 +910,7 @@ export const tools: AITool[] = [
     url: "https://www.bing.com/images/create",
     logoUrl: null,
     tags: ["画像生成", "無料", "Microsoft", "DALL-E", "初心者向け"],
+    isNew: true,
   },
   {
     slug: "sora",
@@ -926,6 +931,7 @@ export const tools: AITool[] = [
     url: "https://sora.com",
     logoUrl: null,
     tags: ["動画生成", "OpenAI", "高品質", "テキストから動画", "映像制作"],
+    isNew: true,
   },
   {
     slug: "luma-ai",
@@ -947,6 +953,7 @@ export const tools: AITool[] = [
     url: "https://lumalabs.ai",
     logoUrl: null,
     tags: ["動画生成", "画像から動画", "リアル映像", "映像制作", "クリエイター"],
+    isNew: true,
   },
   {
     slug: "synthesia",
@@ -968,6 +975,7 @@ export const tools: AITool[] = [
     url: "https://www.synthesia.io",
     logoUrl: null,
     tags: ["動画生成", "AIアバター", "研修動画", "多言語", "法人向け"],
+    isNew: true,
   },
   {
     slug: "catchy",
@@ -989,6 +997,7 @@ export const tools: AITool[] = [
     url: "https://catchy.io",
     logoUrl: null,
     tags: ["コピーライティング", "国産AI", "広告文", "LP", "SNS"],
+    isNew: true,
   },
   {
     slug: "transcope",
@@ -1010,6 +1019,7 @@ export const tools: AITool[] = [
     url: "https://transcope.io",
     logoUrl: null,
     tags: ["SEO", "記事生成", "国産AI", "コンテンツマーケティング", "メディア運営"],
+    isNew: true,
   },
   {
     slug: "sakubun",
@@ -1030,6 +1040,7 @@ export const tools: AITool[] = [
     url: "https://sakubun.ai",
     logoUrl: null,
     tags: ["ライティング", "国産AI", "ブログ", "SNS", "メルマガ"],
+    isNew: true,
   },
   {
     slug: "grammarly",
@@ -1051,6 +1062,7 @@ export const tools: AITool[] = [
     url: "https://www.grammarly.com",
     logoUrl: null,
     tags: ["英語校正", "文法チェック", "ライティング", "英語学習", "ブラウザ拡張"],
+    isNew: true,
   },
   {
     slug: "otter-ai",
@@ -1072,6 +1084,7 @@ export const tools: AITool[] = [
     url: "https://otter.ai",
     logoUrl: null,
     tags: ["文字起こし", "英語", "会議録", "Zoom連携", "議事録"],
+    isNew: true,
   },
   {
     slug: "clova-note",
@@ -1092,6 +1105,7 @@ export const tools: AITool[] = [
     url: "https://clovanote.line.me",
     logoUrl: null,
     tags: ["文字起こし", "無料", "LINE", "日本語", "話者分離"],
+    isNew: true,
   },
   {
     slug: "descript",
@@ -1113,6 +1127,7 @@ export const tools: AITool[] = [
     url: "https://www.descript.com",
     logoUrl: null,
     tags: ["ポッドキャスト", "動画編集", "文字起こし", "音声編集", "コンテンツ制作"],
+    isNew: true,
   },
   {
     slug: "replit-ai",
@@ -1133,6 +1148,7 @@ export const tools: AITool[] = [
     url: "https://replit.com",
     logoUrl: null,
     tags: ["コーディング", "クラウドIDE", "プログラミング学習", "ブラウザ", "デプロイ"],
+    isNew: true,
   },
   {
     slug: "windsurf",
@@ -1154,6 +1170,7 @@ export const tools: AITool[] = [
     url: "https://codeium.com/windsurf",
     logoUrl: null,
     tags: ["コーディング", "AIエディタ", "エージェント", "Codeium", "コード補完"],
+    isNew: true,
   },
   {
     slug: "devin",
@@ -1173,6 +1190,7 @@ export const tools: AITool[] = [
     url: "https://devin.ai",
     logoUrl: null,
     tags: ["AIエンジニア", "自律型AI", "ソフトウェア開発", "エージェント", "自動化"],
+    isNew: true,
   },
   {
     slug: "fireflies-ai",
@@ -1194,6 +1212,7 @@ export const tools: AITool[] = [
     url: "https://fireflies.ai",
     logoUrl: null,
     tags: ["会議録", "文字起こし", "議事録", "自動化", "Zoom連携"],
+    isNew: true,
   },
   {
     slug: "gamma",
@@ -1215,6 +1234,7 @@ export const tools: AITool[] = [
     url: "https://gamma.app",
     logoUrl: null,
     tags: ["プレゼン", "スライド", "ドキュメント", "デザイン自動化", "資料作成"],
+    isNew: true,
   },
   {
     slug: "tome",
@@ -1235,6 +1255,7 @@ export const tools: AITool[] = [
     url: "https://tome.app",
     logoUrl: null,
     tags: ["プレゼン", "ピッチデック", "ストーリーテリング", "営業資料", "デザイン"],
+    isNew: true,
   },
 ];
 
