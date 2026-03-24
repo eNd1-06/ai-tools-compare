@@ -109,23 +109,6 @@ export default async function ToolPage({ params }: Props) {
               )}
             </div>
             <p className="text-gray-600 mb-4">{tool.description}</p>
-            <p className="text-sm text-gray-500 mb-5 leading-relaxed">
-              {tool.name}は
-              {tool.categories.map((c) => categories.find((x) => x.slug === c)?.name).filter(Boolean).join("・")}
-              に分類されるAIツールです。
-              {tool.japaneseSupport
-                ? `日本語に対応しており、日本語スコアは5段階中${tool.japaneseScore}と評価されています。`
-                : "現時点では日本語UIへの対応が限定的です。"}
-              {tool.hasFree
-                ? `無料プランから始められるため、まず試してみることができます。${tool.freeLimit ? `無料プランでは${tool.freeLimit}の制限があります。` : ""}`
-                : "有料プランのみの提供となります。"}
-              {tool.hasAPI ? "APIも提供されているため、他のサービスやツールとの連携も可能です。" : ""}
-              {tool.targetUser.includes("business") && tool.targetUser.includes("personal")
-                ? "個人・法人どちらにも対応しています。"
-                : tool.targetUser.includes("business")
-                ? "主に法人・ビジネス向けのサービスです。"
-                : "個人ユーザーを主なターゲットとしたサービスです。"}
-            </p>
             <div className="flex items-center justify-between mb-5">
               <span className="text-xs text-gray-400">最終更新: 2026年3月</span>
             </div>
@@ -143,15 +126,7 @@ export default async function ToolPage({ params }: Props) {
         {/* 基本情報 */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
           <h2 className="font-semibold text-gray-900 mb-4">基本情報</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="text-center p-4 bg-gray-50 rounded-lg">
-              <div className="text-2xl mb-1">{tool.hasFree ? "✅" : "❌"}</div>
-              <div className="text-xs text-gray-500">無料プラン</div>
-            </div>
-            <div className="text-center p-4 bg-gray-50 rounded-lg">
-              <div className="text-2xl mb-1">{tool.japaneseSupport ? "✅" : "❌"}</div>
-              <div className="text-xs text-gray-500">日本語対応</div>
-            </div>
+          <div className="grid grid-cols-2 gap-4">
             <div className="text-center p-4 bg-gray-50 rounded-lg">
               <div className="text-2xl mb-1">{tool.hasAPI ? "✅" : "❌"}</div>
               <div className="text-xs text-gray-500">API提供</div>

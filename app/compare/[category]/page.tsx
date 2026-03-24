@@ -26,9 +26,6 @@ export default async function CategoryComparePage({ params }: Props) {
   if (!cat) notFound();
 
   const categoryTools = getToolsByCategory(category as Category);
-  const freeTools = categoryTools.filter((t) => t.hasFree);
-  const japaneseTools = categoryTools.filter((t) => t.japaneseSupport);
-  const apiTools = categoryTools.filter((t) => t.hasAPI);
   const detail = categoryDetails[category as Category];
 
   return (
@@ -84,22 +81,6 @@ export default async function CategoryComparePage({ params }: Props) {
             </div>
           </div>
         )}
-
-        {/* サマリー */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-white rounded-xl border border-gray-200 p-4 text-center">
-            <div className="text-2xl font-bold text-green-600">{freeTools.length}</div>
-            <div className="text-sm text-gray-500">無料プランあり</div>
-          </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">{japaneseTools.length}</div>
-            <div className="text-sm text-gray-500">日本語対応</div>
-          </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-4 text-center">
-            <div className="text-2xl font-bold text-purple-600">{apiTools.length}</div>
-            <div className="text-sm text-gray-500">API提供あり</div>
-          </div>
-        </div>
 
         {/* 比較表 */}
         <div className="bg-white rounded-xl border border-gray-200 overflow-hidden mb-8">
