@@ -144,48 +144,6 @@ export default async function CategoryComparePage({ params }: Props) {
           </table>
         </div>
 
-        {/* 条件別おすすめ */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <h2 className="font-semibold text-gray-900 mb-3">🆓 無料で使える</h2>
-            <ul className="space-y-2">
-              {freeTools.map((tool) => (
-                <li key={tool.slug}>
-                  <Link href={`/tools/${tool.slug}`} className="text-blue-600 hover:underline text-sm">
-                    {tool.name}
-                  </Link>
-                  {tool.freeLimit && (
-                    <p className="text-xs text-gray-400">{tool.freeLimit}</p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <h2 className="font-semibold text-gray-900 mb-3">🇯🇵 日本語対応</h2>
-            <ul className="space-y-2">
-              {japaneseTools.map((tool) => (
-                <li key={tool.slug}>
-                  <Link href={`/tools/${tool.slug}`} className="text-blue-600 hover:underline text-sm">
-                    {tool.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <h2 className="font-semibold text-gray-900 mb-3">🔧 API利用可能</h2>
-            <ul className="space-y-2">
-              {apiTools.map((tool) => (
-                <li key={tool.slug}>
-                  <Link href={`/tools/${tool.slug}`} className="text-blue-600 hover:underline text-sm">
-                    {tool.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
       </main>
     </div>
   );

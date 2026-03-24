@@ -286,18 +286,6 @@ export default async function ToolPage({ params }: Props) {
           </div>
         )}
 
-        {/* タグ */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-          <h2 className="font-semibold text-gray-900 mb-3">関連キーワード</h2>
-          <div className="flex flex-wrap gap-2">
-            {tool.tags.map((tag) => (
-              <span key={tag} className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
         {/* 下部CTA */}
         <div className="bg-blue-50 border border-blue-100 rounded-xl p-6 text-center">
           <p className="text-gray-700 font-medium mb-1">{tool.name}に興味がありますか？</p>
