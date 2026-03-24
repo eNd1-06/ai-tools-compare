@@ -33,6 +33,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<Category | "all">("all");
   const [freeOnly, setFreeOnly] = useState(false);
   const [japaneseOnly, setJapaneseOnly] = useState(false);
+  const [apiOnly, setApiOnly] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortOption>("default");
   const [compareList, setCompareList] = useState<string[]>([]);
@@ -52,6 +53,7 @@ export default function Home() {
       if (selectedCategory !== "all" && !tool.categories.includes(selectedCategory)) return false;
       if (freeOnly && !tool.hasFree) return false;
       if (japaneseOnly && !tool.japaneseSupport) return false;
+      if (apiOnly && !tool.hasAPI) return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         if (
@@ -73,7 +75,7 @@ export default function Home() {
       });
     }
     return result;
-  }, [selectedCategory, freeOnly, japaneseOnly, searchQuery, sortBy]);
+  }, [selectedCategory, freeOnly, japaneseOnly, apiOnly, searchQuery, sortBy]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -159,6 +161,15 @@ export default function Home() {
                   className="rounded"
                 />
                 日本語対応
+              </label>
+              <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={apiOnly}
+                  onChange={(e) => setApiOnly(e.target.checked)}
+                  className="rounded"
+                />
+                API提供あり
               </label>
               <select
                 value={sortBy}
@@ -282,10 +293,15 @@ export default function Home() {
       )}
 
       <footer className="border-t border-gray-200 bg-white mt-12">
-        <div className="max-w-6xl mx-auto px-4 py-6 flex gap-6 text-sm text-gray-500">
-          <Link href="/about" className="hover:text-gray-700">このサイトについて</Link>
-          <Link href="/privacy" className="hover:text-gray-700">プライバシーポリシー</Link>
-          <span>© {new Date().getFullYear()} AIツール比較サイト</span>
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-3">
+            <Link href="/ranking" className="hover:text-gray-700">ランキング</Link>
+            <Link href="/articles" className="hover:text-gray-700">比較記事</Link>
+            <Link href="/recommend" className="hover:text-gray-700">用途別おすすめ</Link>
+            <Link href="/about" className="hover:text-gray-700">このサイトについて</Link>
+            <Link href="/privacy" className="hover:text-gray-700">プライバシーポリシー</Link>
+          </div>
+          <p className="text-xs text-gray-400">© {new Date().getFullYear()} AIツール比較サイト</p>
         </div>
       </footer>
     </div>

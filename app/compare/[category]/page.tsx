@@ -32,9 +32,11 @@ export default async function CategoryComparePage({ params }: Props) {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-gradient-to-br from-blue-600 to-blue-800 text-white">
         <div className="max-w-5xl mx-auto px-4 py-3">
-          <Link href="/" className="text-sm text-blue-200 hover:text-white">
-            ← ツール一覧に戻る
-          </Link>
+          <nav className="text-sm text-blue-200 flex items-center gap-1 flex-wrap">
+            <Link href="/" className="hover:text-white">ホーム</Link>
+            <span>›</span>
+            <span className="text-white">{cat.name}AIツール比較</span>
+          </nav>
         </div>
         <div className="max-w-5xl mx-auto px-4 pb-8">
           <h1 className="text-2xl md:text-3xl font-bold mb-2">

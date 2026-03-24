@@ -77,9 +77,13 @@ export default async function ToolPage({ params }: Props) {
       )}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 py-4">
-          <Link href="/" className="text-sm text-blue-600 hover:underline">
-            ← ツール一覧に戻る
-          </Link>
+          <nav className="text-sm text-gray-500 flex items-center gap-1 flex-wrap">
+            <Link href="/" className="hover:text-blue-600">ホーム</Link>
+            <span>›</span>
+            <Link href="/" className="hover:text-blue-600">AIツール一覧</Link>
+            <span>›</span>
+            <span className="text-gray-800">{tool.name}</span>
+          </nav>
         </div>
       </header>
 
@@ -111,6 +115,15 @@ export default async function ToolPage({ params }: Props) {
             <p className="text-gray-600 mb-4">{tool.description}</p>
             <div className="flex items-center justify-between mb-5">
               <span className="text-xs text-gray-400">最終更新: 2026年3月</span>
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`${tool.name}の料金・機能をチェック！`)}&url=${encodeURIComponent(`${BASE_URL}/tools/${tool.slug}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-800 border border-gray-200 rounded-lg px-3 py-1.5 hover:border-gray-400 transition-colors"
+              >
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                Xでシェア
+              </a>
             </div>
             <a
               href={tool.affiliateUrl ?? tool.url}
