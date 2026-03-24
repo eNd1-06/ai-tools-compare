@@ -28,4 +28,5 @@ export const toolAlternatives: Record<string, string[]> = {
   pika: ["runway", "heygen"],
   n8n: ["zapier-ai", "make", "dify"],
   "character-ai": ["chatgpt", "claude"],
+  notta: ["deepl", "chatgpt"],
 };
