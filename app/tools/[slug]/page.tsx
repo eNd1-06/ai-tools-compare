@@ -108,7 +108,27 @@ export default async function ToolPage({ params }: Props) {
                 </span>
               )}
             </div>
-            <p className="text-gray-600 mb-5">{tool.description}</p>
+            <p className="text-gray-600 mb-4">{tool.description}</p>
+            <p className="text-sm text-gray-500 mb-5 leading-relaxed">
+              {tool.name}は
+              {tool.categories.map((c) => categories.find((x) => x.slug === c)?.name).filter(Boolean).join("・")}
+              に分類されるAIツールです。
+              {tool.japaneseSupport
+                ? `日本語に対応しており、日本語スコアは5段階中${tool.japaneseScore}と評価されています。`
+                : "現時点では日本語UIへの対応が限定的です。"}
+              {tool.hasFree
+                ? `無料プランから始められるため、まず試してみることができます。${tool.freeLimit ? `無料プランでは${tool.freeLimit}の制限があります。` : ""}`
+                : "有料プランのみの提供となります。"}
+              {tool.hasAPI ? "APIも提供されているため、他のサービスやツールとの連携も可能です。" : ""}
+              {tool.targetUser.includes("business") && tool.targetUser.includes("personal")
+                ? "個人・法人どちらにも対応しています。"
+                : tool.targetUser.includes("business")
+                ? "主に法人・ビジネス向けのサービスです。"
+                : "個人ユーザーを主なターゲットとしたサービスです。"}
+            </p>
+            <div className="flex items-center justify-between mb-5">
+              <span className="text-xs text-gray-400">最終更新: 2026年3月</span>
+            </div>
             <a
               href={tool.affiliateUrl ?? tool.url}
               target="_blank"

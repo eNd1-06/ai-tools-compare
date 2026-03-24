@@ -21,12 +21,25 @@ export default function AboutPage() {
       <main className="max-w-3xl mx-auto px-4 py-10 space-y-10">
         <section>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">このサイトについて</h1>
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-gray-600 leading-relaxed mb-4">
             このサイトは、ChatGPT・Claude・Geminiをはじめとする{tools.length}件以上のAIツールを、
             料金・日本語対応・用途・機能の観点から比較・紹介しています。
             AIツールを初めて使う方から、特定の用途に合ったツールを探している方まで、
             自分に合った選択ができるよう情報をまとめています。
           </p>
+          <p className="text-gray-600 leading-relaxed">
+            各ツールの情報は公式サイトをもとに作成し、定期的に更新しています。
+            価格・機能は2026年3月時点の情報です。
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold text-gray-900 mb-3">運営者について</h2>
+          <div className="bg-gray-50 rounded-xl p-5 text-sm text-gray-600 space-y-2">
+            <p>AIツールの活用・調査を日常的に行っている個人が運営しています。</p>
+            <p>テキスト生成・画像生成・コーディング支援など幅広いAIツールを実際に使用した経験をもとに、日本語ユーザーに役立つ情報を提供することを目指しています。</p>
+            <p>新しいAIツールのリリースや価格変更にあわせて、情報を随時更新しています。</p>
+          </div>
         </section>
 
         <section>

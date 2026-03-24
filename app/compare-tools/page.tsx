@@ -121,58 +121,60 @@ function CompareContent() {
   ];
 
   return (
-    <>
-      {/* ツール名ヘッダー */}
-      <div className="grid gap-4 mb-4" style={{ gridTemplateColumns: `200px repeat(${selected.length}, 1fr)` }}>
-        <div />
-        {selected.map((tool) => (
-          <div key={tool.slug} className="bg-white rounded-xl border border-gray-200 p-4 text-center">
-            <h2 className="font-bold text-gray-900 mb-1">{tool.name}</h2>
-            <p className="text-xs text-gray-400 mb-3 line-clamp-2">{tool.description}</p>
+    <div className="overflow-x-auto -mx-4 px-4">
+      <div style={{ minWidth: `${200 + selected.length * 220}px` }}>
+        {/* ツール名ヘッダー */}
+        <div className="grid gap-4 mb-4" style={{ gridTemplateColumns: `200px repeat(${selected.length}, 1fr)` }}>
+          <div />
+          {selected.map((tool) => (
+            <div key={tool.slug} className="bg-white rounded-xl border border-gray-200 p-4 text-center">
+              <h2 className="font-bold text-gray-900 mb-1">{tool.name}</h2>
+              <p className="text-xs text-gray-400 mb-3 line-clamp-2">{tool.description}</p>
+              <a
+                href={tool.affiliateUrl ?? tool.url}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                className="block w-full bg-blue-600 text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                公式サイトへ →
+              </a>
+            </div>
+          ))}
+        </div>
+
+        {/* 比較テーブル */}
+        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+          {rows.map((row, i) => (
+            <div
+              key={row.label}
+              className={`grid gap-4 p-4 ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+              style={{ gridTemplateColumns: `200px repeat(${selected.length}, 1fr)` }}
+            >
+              <div className="text-sm font-medium text-gray-500 self-start pt-0.5">{row.label}</div>
+              {selected.map((tool) => (
+                <div key={tool.slug}>{row.render(tool)}</div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* 下部CTA */}
+        <div className="grid gap-4 mt-4" style={{ gridTemplateColumns: `200px repeat(${selected.length}, 1fr)` }}>
+          <div />
+          {selected.map((tool) => (
             <a
+              key={tool.slug}
               href={tool.affiliateUrl ?? tool.url}
               target="_blank"
               rel="nofollow noopener noreferrer"
-              className="block w-full bg-blue-600 text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              className="block text-center bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-colors"
             >
-              公式サイトへ →
+              {tool.name}を試す →
             </a>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
-      {/* 比較テーブル */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        {rows.map((row, i) => (
-          <div
-            key={row.label}
-            className={`grid gap-4 p-4 ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
-            style={{ gridTemplateColumns: `200px repeat(${selected.length}, 1fr)` }}
-          >
-            <div className="text-sm font-medium text-gray-500 self-start pt-0.5">{row.label}</div>
-            {selected.map((tool) => (
-              <div key={tool.slug}>{row.render(tool)}</div>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      {/* 下部CTA */}
-      <div className="grid gap-4 mt-4" style={{ gridTemplateColumns: `200px repeat(${selected.length}, 1fr)` }}>
-        <div />
-        {selected.map((tool) => (
-          <a
-            key={tool.slug}
-            href={tool.affiliateUrl ?? tool.url}
-            target="_blank"
-            rel="nofollow noopener noreferrer"
-            className="block text-center bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-colors"
-          >
-            {tool.name}を試す →
-          </a>
-        ))}
-      </div>
-    </>
+    </div>
   );
 }
 
