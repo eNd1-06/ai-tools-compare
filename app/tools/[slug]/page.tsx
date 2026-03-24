@@ -86,30 +86,38 @@ export default async function ToolPage({ params }: Props) {
       <main className="max-w-4xl mx-auto px-4 py-8">
         {/* ヘッダー */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">{tool.name}</h1>
-              <div className="flex flex-wrap gap-2">
-                {tool.categories.map((cat) => {
-                  const catData = categories.find((c) => c.slug === cat);
-                  return (
-                    <span key={cat} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                      {catData?.name}
-                    </span>
-                  );
-                })}
-              </div>
+          <div className="mb-4">
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">{tool.name}</h1>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {tool.categories.map((cat) => {
+                const catData = categories.find((c) => c.slug === cat);
+                return (
+                  <span key={cat} className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-100">
+                    {catData?.name}
+                  </span>
+                );
+              })}
+              {tool.hasFree && (
+                <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-100">
+                  無料プランあり
+                </span>
+              )}
+              {tool.japaneseSupport && (
+                <span className="text-xs bg-yellow-50 text-yellow-700 px-2 py-1 rounded-full border border-yellow-100">
+                  日本語対応
+                </span>
+              )}
             </div>
+            <p className="text-gray-600 mb-5">{tool.description}</p>
             <a
               href={tool.affiliateUrl ?? tool.url}
               target="_blank"
               rel="nofollow noopener noreferrer"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+              className="block w-full text-center bg-blue-600 text-white px-6 py-3.5 rounded-xl font-semibold text-base hover:bg-blue-700 transition-colors shadow-sm"
             >
-              公式サイトへ →
+              {tool.name}の公式サイトを見る →
             </a>
           </div>
-          <p className="text-gray-600">{tool.description}</p>
         </div>
 
         {/* 基本情報 */}
@@ -259,7 +267,7 @@ export default async function ToolPage({ params }: Props) {
         )}
 
         {/* タグ */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
           <h2 className="font-semibold text-gray-900 mb-3">関連キーワード</h2>
           <div className="flex flex-wrap gap-2">
             {tool.tags.map((tag) => (
@@ -268,6 +276,20 @@ export default async function ToolPage({ params }: Props) {
               </span>
             ))}
           </div>
+        </div>
+
+        {/* 下部CTA */}
+        <div className="bg-blue-50 border border-blue-100 rounded-xl p-6 text-center">
+          <p className="text-gray-700 font-medium mb-1">{tool.name}に興味がありますか？</p>
+          <p className="text-sm text-gray-500 mb-4">公式サイトで詳細な料金・機能を確認できます</p>
+          <a
+            href={tool.affiliateUrl ?? tool.url}
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            className="inline-block bg-blue-600 text-white px-8 py-3.5 rounded-xl font-semibold text-base hover:bg-blue-700 transition-colors shadow-sm"
+          >
+            {tool.name}の公式サイトを見る →
+          </a>
         </div>
       </main>
     </div>
