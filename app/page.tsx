@@ -35,6 +35,17 @@ export default function Home() {
   const [japaneseOnly, setJapaneseOnly] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortOption>("default");
+  const [compareList, setCompareList] = useState<string[]>([]);
+
+  const toggleCompare = (slug: string) => {
+    setCompareList((prev) =>
+      prev.includes(slug)
+        ? prev.filter((s) => s !== slug)
+        : prev.length < 3
+        ? [...prev, slug]
+        : prev
+    );
+  };
 
   const filtered = useMemo(() => {
     let result = tools.filter((tool) => {
@@ -165,52 +176,68 @@ export default function Home() {
         {/* ツール一覧 */}
         <p className="text-sm text-gray-500 mb-4">{filtered.length}件</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map((tool) => (
-            <Link
-              key={tool.slug}
-              href={`/tools/${tool.slug}`}
-              className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md hover:border-blue-200 transition-all"
-            >
-              <div className="flex items-start justify-between mb-2">
-                <h2 className="font-semibold text-gray-900 leading-tight">{tool.name}</h2>
-                <div className="flex gap-1 flex-shrink-0 ml-2">
-                  {tool.hasFree && (
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full whitespace-nowrap">
-                      無料あり
+          {filtered.map((tool) => {
+            const inCompare = compareList.includes(tool.slug);
+            return (
+              <div key={tool.slug} className="flex flex-col">
+                <Link
+                  href={`/tools/${tool.slug}`}
+                  className={`bg-white rounded-t-xl border border-b-0 p-5 hover:shadow-md transition-all flex-1 ${inCompare ? "border-blue-400" : "border-gray-200 hover:border-blue-200"}`}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <h2 className="font-semibold text-gray-900 leading-tight">{tool.name}</h2>
+                    <div className="flex gap-1 flex-shrink-0 ml-2">
+                      {tool.hasFree && (
+                        <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full whitespace-nowrap">
+                          無料あり
+                        </span>
+                      )}
+                      {tool.japaneseSupport && (
+                        <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full whitespace-nowrap">
+                          日本語
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex gap-0.5 mb-2">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <span key={s} className={`text-sm ${s <= tool.japaneseScore ? "text-yellow-400" : "text-gray-200"}`}>★</span>
+                    ))}
+                    <span className="text-xs text-gray-400 ml-1 self-center">日本語</span>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-3 line-clamp-2">{tool.description}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex gap-1 flex-wrap">
+                      {tool.categories.map((cat) => {
+                        const catData = categories.find((c) => c.slug === cat);
+                        return (
+                          <span key={cat} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
+                            {categoryIcons[cat]} {catData?.name}
+                          </span>
+                        );
+                      })}
+                    </div>
+                    <span className="text-sm font-semibold text-blue-600 flex-shrink-0 ml-2">
+                      {formatPrice(tool)}
                     </span>
-                  )}
-                  {tool.japaneseSupport && (
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full whitespace-nowrap">
-                      日本語
-                    </span>
-                  )}
-                </div>
+                  </div>
+                </Link>
+                <button
+                  onClick={() => toggleCompare(tool.slug)}
+                  disabled={!inCompare && compareList.length >= 3}
+                  className={`rounded-b-xl border px-4 py-2 text-xs font-medium transition-colors ${
+                    inCompare
+                      ? "bg-blue-600 text-white border-blue-400"
+                      : compareList.length >= 3
+                      ? "bg-gray-50 text-gray-300 border-gray-200 cursor-not-allowed"
+                      : "bg-gray-50 text-gray-500 border-gray-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200"
+                  }`}
+                >
+                  {inCompare ? "✓ 比較中（クリックで解除）" : "+ 比較に追加"}
+                </button>
               </div>
-              {/* 日本語スコア */}
-              <div className="flex gap-0.5 mb-2">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <span key={s} className={`text-sm ${s <= tool.japaneseScore ? "text-yellow-400" : "text-gray-200"}`}>★</span>
-                ))}
-                <span className="text-xs text-gray-400 ml-1 self-center">日本語</span>
-              </div>
-              <p className="text-sm text-gray-500 mb-3 line-clamp-2">{tool.description}</p>
-              <div className="flex items-center justify-between">
-                <div className="flex gap-1 flex-wrap">
-                  {tool.categories.map((cat) => {
-                    const catData = categories.find((c) => c.slug === cat);
-                    return (
-                      <span key={cat} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
-                        {categoryIcons[cat]} {catData?.name}
-                      </span>
-                    );
-                  })}
-                </div>
-                <span className="text-sm font-semibold text-blue-600 flex-shrink-0 ml-2">
-                  {formatPrice(tool)}
-                </span>
-              </div>
-            </Link>
-          ))}
+            );
+          })}
         </div>
 
         {filtered.length === 0 && (
@@ -220,6 +247,39 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      {/* 比較スティッキーバー */}
+      {compareList.length > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+            <span className="text-sm text-gray-500 flex-shrink-0">比較中：</span>
+            <div className="flex gap-2 flex-1 flex-wrap">
+              {compareList.map((slug) => {
+                const t = tools.find((x) => x.slug === slug);
+                return (
+                  <span key={slug} className="flex items-center gap-1 bg-blue-50 text-blue-700 text-sm px-3 py-1 rounded-full border border-blue-200">
+                    {t?.name}
+                    <button onClick={() => toggleCompare(slug)} className="text-blue-400 hover:text-blue-700 ml-0.5">×</button>
+                  </span>
+                );
+              })}
+              {compareList.length < 3 && (
+                <span className="text-xs text-gray-400 self-center">（最大3件）</span>
+              )}
+            </div>
+            <a
+              href={`/compare-tools?tools=${compareList.join(",")}`}
+              className={`flex-shrink-0 px-5 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                compareList.length >= 2
+                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  : "bg-gray-200 text-gray-400 pointer-events-none"
+              }`}
+            >
+              比較する {compareList.length >= 2 ? "→" : `（あと${2 - compareList.length}件）`}
+            </a>
+          </div>
+        </div>
+      )}
 
       <footer className="border-t border-gray-200 bg-white mt-12">
         <div className="max-w-6xl mx-auto px-4 py-6 flex gap-6 text-sm text-gray-500">
