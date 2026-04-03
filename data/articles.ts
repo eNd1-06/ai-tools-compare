@@ -163,8 +163,8 @@ export const articles: Article[] = [
   },
   {
     slug: "ai-transcription-tools-comparison",
-    title: "AI文字起こしツール比較【2026年】Notta・Otter・CloveNote・Firefliesを徹底比較",
-    description: "会議・インタビュー・授業の文字起こしに使えるAIツールを日本語精度・料金・機能で比較します。",
+    title: "AI文字起こしツール比較【2026年最新】無料あり・日本語対応4選を徹底比較",
+    description: "Notta・CLOVA Note・Otter・Firefliesの日本語精度・料金・使いやすさを一覧比較。無料で使えるツールや日本語に強いおすすめも紹介します。",
     date: "2026-03-21",
     tools: ["notta", "otter-ai", "clova-note", "fireflies-ai"],
     sections: [
@@ -428,8 +428,8 @@ export const articles: Article[] = [
   },
   {
     slug: "ai-tools-for-youtube",
-    title: "YouTuber・動画クリエイター向けAIツール【2026年】制作時間を半分に",
-    description: "YouTube動画の企画・台本・サムネイル・編集・字幕に使えるAIツールをまとめました。制作効率化の具体的な方法を解説します。",
+    title: "YouTuber向けAIツール5選【2026年最新】企画・編集・サムネまで無料で時短",
+    description: "YouTube動画の企画・台本・字幕・サムネイルを自動化するAIツール5選。ChatGPT・InVideo AI・Ideogramなど無料から使える方法をわかりやすく解説。",
     date: "2026-03-24",
     tools: ["chatgpt", "invideo-ai", "pictory-ai", "notta", "ideogram"],
     sections: [
