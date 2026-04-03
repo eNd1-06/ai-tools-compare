@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tool = getToolBySlug(slug);
   if (!tool) return {};
-  const title = `${tool.name}の料金・機能・評判 | AIツール比較`;
+  const title = `${tool.name}の料金・機能・評判【2026年最新】${tool.hasFree ? "無料あり" : ""}| AIツール比較`;
   const url = `${BASE_URL}/tools/${slug}`;
   return {
     title,

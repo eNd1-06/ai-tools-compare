@@ -831,7 +831,7 @@ export const tools: AITool[] = [
   {
     slug: "character-ai",
     name: "Character.AI",
-    description: "キャラクターとの対話に特化したAIプラットフォーム。有名人・アニメキャラクター・独自キャラとチャットできる。",
+    description: "キャラクターとの対話に特化したAIプラットフォーム。アニメキャラ・有名人・オリジナルキャラと無料でチャットできる。語学練習・エンタメ用途に人気。基本機能は完全無料。",
     categories: ["text"],
     hasFree: true,
     freeLimit: "基本機能は無料、生成速度に制限あり",
@@ -1089,7 +1089,7 @@ export const tools: AITool[] = [
   {
     slug: "clova-note",
     name: "CLOVA Note",
-    description: "LINEが提供する無料の日本語AI文字起こしサービス。月300分まで無料で使え、話者分離機能も搭載。LINEアカウントで即座に使い始められる。",
+    description: "LINE提供の無料AI文字起こしツール。月300分無料・日本語精度が高い・話者分離機能付き。会議・授業・インタビューの録音を簡単テキスト化。LINEアカウントですぐ始められます。",
     categories: ["voice"],
     hasFree: true,
     freeLimit: "月300分まで無料",
