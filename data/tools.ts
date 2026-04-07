@@ -32,6 +32,8 @@ export type AITool = {
   logoUrl: string | null;
   tags: string[];
   isNew?: boolean;
+  pros?: string[];  // メリット
+  cons?: string[];  // デメリット
 };
 
 export const categories: { slug: Category; name: string }[] = [
@@ -641,6 +643,8 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSF+ECSAMY+1JUK+1HL85U",
     logoUrl: null,
     tags: ["SEO", "記事生成", "国産AI", "ブログ", "コンテンツマーケティング"],
+    pros: ["SEO特化の設計でGoogle検索上位を狙いやすい記事を生成できる", "日本語品質が高く修正コストが少なくて済む", "GMOが運営する国産ツールで安心感がある", "キーワード入力から見出し構成まで自動で作成できる"],
+    cons: ["無料プランがなく月2,980円〜の費用がかかる", "テキスト生成に特化しており画像生成などほかの用途には対応していない"],
   },
   {
     slug: "conoha-ai-canvas",
@@ -661,6 +665,8 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSG+IGHAY+50+7RU5R6",
     logoUrl: null,
     tags: ["画像生成", "ブラウザ", "国産AI", "Stable Diffusion", "GMO"],
+    pros: ["ブラウザだけで動作しソフトのインストールが不要", "月990円とリーズナブルな価格でStable Diffusionが使える", "GMO運営の国産サービスで日本語サポートが充実", "商用利用可能なライセンスで生成した画像をビジネスに使える"],
+    cons: ["無料プランがなくお試しに費用がかかる", "高度なプロンプト調整には一定の学習コストが必要"],
   },
   {
     slug: "irusiru",
@@ -681,6 +687,8 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSF+FZQ7IY+5UMS+5YJRM",
     logoUrl: null,
     tags: ["スライド", "プレゼン資料", "PowerPoint", "国産AI", "デザイン自動化"],
+    pros: ["テキストを入力するだけでデザイン済みスライドが自動生成される", "デザインの知識ゼロでも見栄えの良い資料が作れる", "日本語フル対応の国産ツールで安心して使える", "PowerPointへのエクスポートにも対応している"],
+    cons: ["複雑なレイアウトや独自デザインは手動修正が必要になることがある", "PowerPointほど細かいカスタマイズの自由度はない"],
   },
   {
     slug: "languise",
@@ -701,6 +709,8 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSF+G0X2QI+5L4K+5YJRM",
     logoUrl: null,
     tags: ["翻訳", "ファイル翻訳", "PDF翻訳", "校正", "要約"],
+    pros: ["PDF・Word・Excelをファイルごとまるごと翻訳できる", "翻訳・校正・要約を一括処理できるオールインワン設計", "法律・医療・ビジネス文書など専門文書にも対応している", "フォーマットを維持したまま翻訳できるため整形し直す手間が省ける"],
+    cons: ["月額課金のため翻訳量が少ない月はコストパフォーマンスが低くなる", "AIによる翻訳のためニュアンスに若干のズレが生じる場合がある"],
   },
   {
     slug: "aiarty-image-enhancer",
@@ -721,6 +731,8 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSF+G533YY+428G+HVFKY",
     logoUrl: null,
     tags: ["画像高画質化", "アップスケール", "解像度向上", "写真修復", "AI補完"],
+    pros: ["AIが低解像度画像を自動補完し高画質に仕上げる", "古い写真の修復や印刷用途の拡大に特に効果的", "年額ライセンスで長期利用するとコスパが高い", "バッチ処理で複数画像をまとめて処理できる"],
+    cons: ["月額ではなく年間ライセンスのため初期費用が一度にかかる", "極端に低解像度な画像や損傷が激しい画像は限界がある"],
   },
   {
     slug: "bunken",
@@ -741,6 +753,8 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSF+GCTQU2+3Q2O+HZ2R6",
     logoUrl: null,
     tags: ["文章校正", "ライター", "編集", "表記ゆれ", "日本語"],
+    pros: ["Webライターに必要な校正機能がAIでひとまとめになっている", "表記ゆれ・誤字・読みにくい文章を自動検出してくれる", "月2,178円でライター・編集者向け機能としてコスパが高い", "WordPress・Googleドキュメントとの連携にも対応"],
+    cons: ["無料プランがなく即課金が必要", "文章生成AIではなく校正支援ツールのため用途が限られる"],
   },
   {
     slug: "idiy",
@@ -761,6 +775,8 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSF+GDF6FU+2KSK+5YZ76",
     logoUrl: null,
     tags: ["英語添削", "英文校正", "英語学習", "AI学習", "ライティング"],
+    pros: ["AI添削とネイティブ講師のダブルフィードバックが受けられる", "月1,480円と英語添削サービスとして非常にコスパが高い", "スマホアプリで通勤・隙間時間に英語ライティングを練習できる", "英文メールやビジネス文書の添削にも対応している"],
+    cons: ["英語添削専用ツールのためほかの言語・用途には使えない", "ネイティブ講師の添削は返答まで数時間かかることがある"],
   },
   {
     slug: "awarefy",
@@ -782,6 +798,8 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSG+ZQ1UI+5CBW+5YRHE",
     logoUrl: null,
     tags: ["メンタルヘルス", "ストレス管理", "マインドフルネス", "感情記録", "AI相談"],
+    pros: ["Google Playベストアプリ受賞の実績がありユーザー評価が高い", "感情記録・マインドフルネス・AI相談を一つのアプリで完結できる", "基本機能は無料で使えるためリスクなく試せる", "プロの心理士監修によるコンテンツが収録されている"],
+    cons: ["メンタルケア特化のため業務効率化など他用途には向かない", "プレミアム機能の利用には月960円の課金が必要"],
   },
   {
     slug: "jimdo",
@@ -804,6 +822,8 @@ export const tools: AITool[] = [
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4AZLSG+13ANH6+OFG+TRVYQ",
     logoUrl: null,
     tags: ["ホームページ作成", "ノーコード", "Webサイト", "AI自動生成", "ビルダー"],
+    pros: ["AIへの質問に答えるだけで最短90秒でホームページが完成する", "無料プランがありコストをかけずに試せる", "日本語フルサポートで初心者でも迷わず使える", "SSL・SEO設定が自動化されており技術知識が不要"],
+    cons: ["WordPressのような細かいカスタマイズには対応していない", "無料プランはJimdoのサブドメインになり広告が表示される"],
   },
   {
     slug: "notta",
@@ -827,6 +847,8 @@ export const tools: AITool[] = [
     logoUrl: null,
     tags: ["文字起こし", "議事録", "音声認識", "Zoom", "自動化"],
     isNew: true,
+    pros: ["Zoom・Teams・Google Meetと連携して会議を自動で文字起こし・議事録化できる", "月120分まで無料で試せるのでコストリスクなく始められる", "日本語の文字起こし精度が高く修正の手間が少ない", "音声ファイルのアップロードにも対応し過去の録音も処理できる"],
+    cons: ["長時間会議が多い場合は有料プランへの移行が必要になる", "専門用語や方言・訛りは認識精度が下がることがある"],
   },
   {
     slug: "character-ai",

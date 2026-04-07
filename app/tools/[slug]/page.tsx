@@ -220,6 +220,45 @@ export default async function ToolPage({ params }: Props) {
           </ul>
         </div>
 
+        {/* メリット・デメリット */}
+        {(tool.pros || tool.cons) && (
+          <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+            <h2 className="font-semibold text-gray-900 mb-4">{tool.name}のメリット・デメリット</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {tool.pros && tool.pros.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-medium text-green-700 mb-2 flex items-center gap-1.5">
+                    <span className="text-base">👍</span> メリット
+                  </h3>
+                  <ul className="space-y-2">
+                    {tool.pros.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                        <span className="text-green-500 font-bold mt-0.5 shrink-0">✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {tool.cons && tool.cons.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-medium text-red-600 mb-2 flex items-center gap-1.5">
+                    <span className="text-base">👎</span> デメリット
+                  </h3>
+                  <ul className="space-y-2">
+                    {tool.cons.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                        <span className="text-red-400 font-bold mt-0.5 shrink-0">✗</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* 日本語対応スコア */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
           <h2 className="font-semibold text-gray-900 mb-3">日本語対応スコア</h2>
