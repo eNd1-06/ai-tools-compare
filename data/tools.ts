@@ -2100,6 +2100,29 @@ export const tools: AITool[] = [
     tags: ["画面録画", "動画メッセージ", "自動要約", "非同期", "チーム"],
     isNew: true,
   },
+  {
+    slug: "daihon-kun",
+    name: "台本くん",
+    description: "AIがYouTube・ゆっくり解説の台本を自動生成するツール。ジャンル・キャラ・尺を選ぶだけでプロ品質の台本が完成。タイトル案・概要欄・セクション構成まで一括生成。無料で試せる。",
+    categories: ["text", "other"],
+    hasFree: true,
+    freeLimit: "月3回まで無料生成",
+    plans: [
+      { name: "Free", price: 0, currency: "JPY", billingCycle: "monthly" },
+      { name: "Pro", price: 980, currency: "JPY", billingCycle: "monthly" },
+    ],
+    japaneseSupport: true,
+    japaneseScore: 5,
+    hasAPI: false,
+    targetUser: ["personal"],
+    recommendedFor: ["YouTube台本を効率化したいYouTuber", "ゆっくり解説・ゆっくり実況を作りたい人", "動画ネタ・構成が思いつかない人"],
+    url: "https://daihon-kun.vercel.app",
+    logoUrl: null,
+    tags: ["YouTube", "台本", "ゆっくり解説", "動画制作", "コンテンツ生成"],
+    isNew: true,
+    pros: ["ジャンル・キャラ・尺を選ぶだけで台本が自動完成する", "タイトル案・概要欄・セクション構成まで一括生成される", "月3回まで無料で試せるためリスクなく始められる", "日本語に完全対応した国産ツール"],
+    cons: ["ゆっくり解説・AI/ガジェット系のジャンルに特化しており対応ジャンルが限られる", "無料プランは月3回まで"],
+  },
 ];
 
 export function getToolBySlug(slug: string): AITool | undefined {
