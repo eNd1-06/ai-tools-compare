@@ -16,9 +16,15 @@ const geistMono = Geist_Mono({
 const BASE_URL = "https://ai-tools-compare-ten.vercel.app";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
+const defaultTitle = "AIツール比較サイト【2026年最新】ChatGPT・Claude・Gemini料金比較";
+const defaultDescription = "ChatGPT、Claude、Geminiなど人気AIツールを料金・機能・日本語対応で徹底比較。無料で使えるAIツール多数掲載。あなたに最適なAIツールが1分で見つかります。";
+
 export const metadata: Metadata = {
-  title: "AIツール比較サイト",
-  description: "ChatGPT、Claude、Geminiなど人気AIツールを徹底比較。用途別・カテゴリ別に最適なAIツールが見つかります。",
+  title: {
+    default: defaultTitle,
+    template: "%s",
+  },
+  description: defaultDescription,
   verification: {
     google: "X6orpG-UcJpIZWQ8kOvac6XrXv7_GocQWCtvzKjtPw0",
   },
@@ -27,13 +33,13 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     url: BASE_URL,
     siteName: "AIツール比較サイト",
-    title: "AIツール比較サイト",
-    description: "ChatGPT、Claude、Geminiなど人気AIツールを徹底比較。用途別・カテゴリ別に最適なAIツールが見つかります。",
+    title: defaultTitle,
+    description: defaultDescription,
   },
   twitter: {
     card: "summary",
-    title: "AIツール比較サイト",
-    description: "ChatGPT、Claude、Geminiなど人気AIツールを徹底比較。用途別・カテゴリ別に最適なAIツールが見つかります。",
+    title: defaultTitle,
+    description: defaultDescription,
   },
   alternates: {
     canonical: BASE_URL,

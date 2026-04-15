@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { articles } from "@/data/articles";
 
 export const metadata: Metadata = {
-  title: "AIツール比較記事一覧 | AIツール比較サイト",
-  description: "ChatGPT vs Claude、無料AIツール特集、コーディングAI比較など、AIツールを深掘りする記事を掲載しています。",
+  title: "AIツール比較記事【2026年最新】ChatGPT vs Claude・無料AI15選・ライティングAI",
+  description: "ChatGPT vs Claude vs Gemini比較、無料AIツール15選、SEO記事作成AI比較など人気の比較記事を掲載。最新情報でAIツール選びをサポートします。",
 };
 
 export default function ArticlesPage() {

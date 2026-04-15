@@ -50,7 +50,7 @@ export const tools: AITool[] = [
   {
     slug: "chatgpt",
     name: "ChatGPT",
-    description: "OpenAIが開発した世界最大規模のAIチャットツール。文章生成・要約・翻訳・プログラミング支援など幅広い用途に対応。",
+    description: "OpenAIのGPT-4oを搭載したAIチャットツール。無料プランあり・Plusは$20/月。文章生成・要約・翻訳・コード生成に対応。利用者数No.1のAIツール。",
     categories: ["text", "coding"],
     hasFree: true,
     freeLimit: "GPT-4oへのアクセス制限あり、メッセージ数制限あり",
@@ -71,7 +71,7 @@ export const tools: AITool[] = [
   {
     slug: "claude",
     name: "Claude",
-    description: "Anthropicが開発したAIアシスタント。長文の読み込みや分析、安全性の高さが特徴。",
+    description: "AnthropicのAIアシスタント。長文読み込み・日本語品質・安全性が特徴。無料プランあり、Pro$20/月。文章作成・分析・コーディングに最適。",
     categories: ["text", "coding"],
     hasFree: true,
     freeLimit: "メッセージ数制限あり、Claude 3.5 Sonnetまで",
@@ -92,7 +92,7 @@ export const tools: AITool[] = [
   {
     slug: "gemini",
     name: "Gemini",
-    description: "Googleが開発したAIアシスタント。Google検索・GmailなどGoogleサービスとの連携が強み。",
+    description: "GoogleのAIアシスタント。無料プランあり・Advancedは$19.99/月。Gmail・Google Drive・YouTube連携が強み。Googleユーザーに最適。",
     categories: ["text", "image", "coding"],
     hasFree: true,
     freeLimit: "Gemini 1.5 Flashまで",
@@ -254,7 +254,7 @@ export const tools: AITool[] = [
   {
     slug: "cursor",
     name: "Cursor",
-    description: "AIを中心に設計されたコードエディタ。コードの補完・生成・デバッグをAIがサポート。VS Codeベース。",
+    description: "AIを中心に設計したコードエディタ（VS Codeベース）。コード補完・生成・デバッグをAIがサポート。無料プランあり、Pro$20/月。エンジニアの生産性を大幅向上。",
     categories: ["coding"],
     hasFree: true,
     freeLimit: "2週間のProトライアル後、基本機能のみ",
@@ -275,7 +275,7 @@ export const tools: AITool[] = [
   {
     slug: "github-copilot",
     name: "GitHub Copilot",
-    description: "GitHubとOpenAIが共同開発したAIコーディングアシスタント。VS Code等の主要IDEに対応。",
+    description: "GitHubとOpenAIが共同開発したAIコーディングアシスタント。月2,000回まで無料・Proは$10/月。VS Code・JetBrainsなど主要IDEに対応。学生は無料。",
     categories: ["coding"],
     hasFree: true,
     freeLimit: "月2,000回のコード補完、50回のチャットまで",

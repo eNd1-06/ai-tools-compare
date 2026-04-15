@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { tools, categories } from "@/data/tools";
 
 export const metadata: Metadata = {
-  title: "AIツールランキング【2026年最新】日本語対応・無料・カテゴリ別",
-  description: "日本語対応スコア順・無料プランあり・カテゴリ別のAIツールランキング。2026年最新版。",
+  title: "AIツールランキング【2026年最新】日本語対応TOP10・無料おすすめ・カテゴリ別",
+  description: "日本語対応AIツールTOP10・無料で使えるAIツールTOP10・カテゴリ別ランキングを掲載。2026年最新版。用途に合ったAIツールが1分で見つかります。",
 };
 
 function formatPrice(tool: (typeof tools)[0]) {

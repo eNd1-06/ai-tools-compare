@@ -11,7 +11,7 @@ export const articles: Article[] = [
   {
     slug: "chatgpt-vs-claude-vs-gemini",
     title: "ChatGPT vs Claude vs Gemini 徹底比較【2026年】料金・日本語・使い勝手",
-    description: "3大AIチャットツールを料金・日本語対応・得意分野で徹底比較。どれを選ぶべきかわかります。",
+    description: "ChatGPT・Claude・Geminiを料金（$20/月〜）・日本語品質・得意分野で徹底比較。初心者でもどれを選ぶべきか5分でわかります。",
     date: "2026-03-01",
     tools: ["chatgpt", "claude", "gemini"],
     sections: [
@@ -40,7 +40,7 @@ export const articles: Article[] = [
   {
     slug: "free-ai-tools-2026",
     title: "無料で使えるAIツール15選【2026年最新】テキスト・画像・コーディング",
-    description: "完全無料または無料プランで使えるAIツールをカテゴリ別に紹介。コスト0円でAIを活用する方法をまとめました。",
+    description: "完全無料または無料プランで使えるAIツールを15個厳選。テキスト・画像・コーディング別にコスト0円でAIを最大活用する方法をまとめました。",
     date: "2026-03-05",
     tools: ["chatgpt", "claude", "gemini", "bing-image-creator", "replit-ai"],
     sections: [
@@ -69,7 +69,7 @@ export const articles: Article[] = [
   {
     slug: "ai-writing-tools-comparison",
     title: "AIライティングツール比較【2026年】ブログ・コピー・SEO記事に最適なのは？",
-    description: "ライター・ブロガー向けのAIライティングツールを比較。日本語品質・料金・機能の違いを解説します。",
+    description: "ChatGPT・Catchy・Transcope・作文くんをライター・ブロガー視点で比較。日本語品質・料金・SEO対応の違いを徹底解説します。",
     date: "2026-03-10",
     tools: ["chatgpt", "claude", "catchy", "transcope", "sakubun"],
     sections: [
@@ -98,7 +98,7 @@ export const articles: Article[] = [
   {
     slug: "ai-coding-tools-comparison",
     title: "AIコーディングツール比較【2026年】GitHub Copilot・Cursor・Devinどれが最強？",
-    description: "エンジニア向けAIコーディングツールを機能・料金・使い勝手で比較。初心者からプロまで最適な選択肢を紹介します。",
+    description: "GitHub Copilot・Cursor・Replit AIをエンジニア視点で比較。機能・料金・補完精度の違いを解説。初心者からプロまで最適な選択肢がわかります。",
     date: "2026-03-15",
     tools: ["github-copilot", "cursor", "windsurf", "replit-ai", "devin"],
     sections: [
@@ -131,7 +131,7 @@ export const articles: Article[] = [
   {
     slug: "ai-image-generation-comparison",
     title: "AI画像生成ツール比較【2026年】Midjourney・DALL-E・Stable Diffusion・Ideogram",
-    description: "主要AI画像生成ツールを品質・料金・日本語対応で比較。クリエイター・デザイナー向けの選び方ガイドです。",
+    description: "Midjourney・Stable Diffusion・DALL-E 3・Adobe Fireflyを画質・料金・使いやすさで比較。クリエイター・デザイナー向けの選び方ガイドです。",
     date: "2026-03-20",
     tools: ["midjourney", "dall-e", "stable-diffusion", "ideogram", "leonardo-ai"],
     sections: [
@@ -197,7 +197,7 @@ export const articles: Article[] = [
   {
     slug: "ai-presentation-tools-comparison",
     title: "AIプレゼン作成ツール比較【2026年】GammaとTomeどちらが使いやすい？",
-    description: "テキストを入力するだけでスライドを自動生成するAIツールGammaとTomeを徹底比較します。",
+    description: "テキスト入力だけでスライドを自動生成するGammaとTomeを料金・デザイン品質・日本語対応で徹底比較。どちらがプレゼン作成に最適かわかります。",
     date: "2026-03-22",
     tools: ["gamma", "tome", "chatgpt"],
     sections: [
@@ -226,7 +226,7 @@ export const articles: Article[] = [
   {
     slug: "ai-tools-for-beginners",
     title: "AIツール初心者ガイド【2026年】まず最初に使うべきAIツール5選",
-    description: "AIツールをこれから始めたい方に向けて、最初に試すべきツールをわかりやすく解説します。",
+    description: "AIツールを初めて使う方へ。ChatGPT・Claude・Geminiなど最初に試すべき無料ツールをわかりやすく解説。2026年版・入門者向け完全ガイドです。",
     date: "2026-03-23",
     tools: ["chatgpt", "gemini", "bing-image-creator", "notta", "gamma"],
     sections: [
@@ -485,7 +485,7 @@ export const articles: Article[] = [
   {
     slug: "ai-tools-2026-trends",
     title: "2026年注目のAIツール・トレンド：AIエージェントから動画生成まで",
-    description: "2026年に押さえておきたいAIツールのトレンドと、注目のサービスを紹介します。",
+    description: "2026年に押さえておきたいAIツールのトレンドを徹底解説。GPT-4o・Gemini 2.0・Claude 3.5など注目のサービスと活用法を紹介します。",
     date: "2026-03-24",
     tools: ["manus-ai", "devin", "sora", "kling-ai", "taskade"],
     sections: [

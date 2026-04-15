@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { recommendTypes } from "@/data/recommend";
 
 export const metadata: Metadata = {
-  title: "用途別AIツールおすすめ | ライター・エンジニア・クリエイター・ビジネス向け",
-  description: "ライター・エンジニア・クリエイター・ビジネスパーソン向けに、用途別でおすすめのAIツールを紹介します。",
+  title: "用途別AIツールおすすめ【2026年】ライター・エンジニア・ビジネス・クリエイター向け",
+  description: "ライター・エンジニア・クリエイター・ビジネスパーソン向けにAIツールを厳選紹介。あなたの目的に合った最適なAIツールが見つかります。無料ツールも多数掲載。",
 };
 
 export default function RecommendPage() {
