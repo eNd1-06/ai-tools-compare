@@ -6,6 +6,7 @@ import { toolFaqs } from "@/data/faqs";
 import { toolAlternatives } from "@/data/alternatives";
 import { CompareButton } from "@/components/CompareButton";
 import { AdSlot } from "@/components/AdSlot";
+import { getRelatedVsPairs, getVsSlug } from "@/data/vs-pairs";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -55,6 +56,12 @@ export default async function ToolPage({ params }: Props) {
   const alternativeTools = alternativeSlugs
     .map((slug) => tools.find((t) => t.slug === slug))
     .filter(Boolean);
+
+  const vsRelated = getRelatedVsPairs(tool.slug).map((pair) => {
+    const other = pair.slugA === tool.slug ? pair.slugB : pair.slugA;
+    const otherTool = tools.find((t) => t.slug === other);
+    return { slug: getVsSlug(pair.slugA, pair.slugB), otherTool };
+  }).filter((v): v is { slug: string; otherTool: NonNullable<typeof v.otherTool> } => v.otherTool != null);
 
   const faqSchema = faqs.length > 0 ? {
     "@context": "https://schema.org",
@@ -220,6 +227,18 @@ export default async function ToolPage({ params }: Props) {
           </ul>
         </div>
 
+        {/* 詳細レビュー */}
+        {tool.review && (
+          <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+            <h2 className="font-semibold text-gray-900 mb-4">{tool.name}の詳細レビュー・評価</h2>
+            <div className="text-sm text-gray-700 leading-relaxed space-y-3">
+              {tool.review.split("\n\n").map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* メリット・デメリット */}
         {(tool.pros || tool.cons) && (
           <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
@@ -284,6 +303,27 @@ export default async function ToolPage({ params }: Props) {
         </div>
 
         <AdSlot slot="auto" />
+
+        {/* 他ツールと比較 */}
+        {vsRelated.length > 0 && (
+          <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+            <h2 className="font-semibold text-gray-900 mb-4">{tool.name}と他ツールを比較する</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {vsRelated.map(({ slug, otherTool }) => (
+                <Link
+                  key={slug}
+                  href={`/vs/${slug}`}
+                  className="flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:border-blue-200 hover:bg-blue-50 transition-colors"
+                >
+                  <span className="text-sm font-medium text-gray-900">
+                    {tool.name} vs {otherTool.name}
+                  </span>
+                  <span className="text-xs text-blue-600 shrink-0">比較する →</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* 代替ツール */}
         {alternativeTools.length > 0 && (
