@@ -14,6 +14,14 @@ export const vsPairs: VsPair[] = [
   { slugA: "gamma", slugB: "tome" },
   { slugA: "notta", slugB: "otter-ai" },
   { slugA: "midjourney", slugB: "stable-diffusion" },
+  // Tier 2
+  { slugA: "cursor", slugB: "github-copilot" },
+  { slugA: "windsurf", slugB: "replit-ai" },
+  { slugA: "elevenlabs", slugB: "murf-ai" },
+  { slugA: "runway", slugB: "luma-ai" },
+  { slugA: "catchy", slugB: "sakubun" },
+  { slugA: "make", slugB: "zapier-ai" },
+  { slugA: "n8n", slugB: "zapier-ai" },
 ];
 
 export function getVsSlug(slugA: string, slugB: string): string {
