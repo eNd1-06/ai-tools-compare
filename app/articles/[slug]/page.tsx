@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { articles } from "@/data/articles";
 import { tools } from "@/data/tools";
 import { AdSlot } from "@/components/AdSlot";
+import { vsPairs, getVsSlug } from "@/data/vs-pairs";
 
 const BASE_URL = "https://ai-tools-compare-ten.vercel.app";
 
@@ -35,6 +36,15 @@ export default async function ArticlePage({ params }: Props) {
   const relatedTools = article.tools
     .map((s) => tools.find((t) => t.slug === s))
     .filter(Boolean) as (typeof tools)[number][];
+
+  const relatedVs = vsPairs
+    .filter((p) => article.tools.includes(p.slugA) && article.tools.includes(p.slugB))
+    .map((p) => ({
+      slug: getVsSlug(p.slugA, p.slugB),
+      toolA: tools.find((t) => t.slug === p.slugA)!,
+      toolB: tools.find((t) => t.slug === p.slugB)!,
+    }))
+    .filter((v) => v.toolA && v.toolB);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -69,7 +79,7 @@ export default async function ArticlePage({ params }: Props) {
 
         {/* 関連ツール */}
         {relatedTools.length > 0 && (
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="bg-white rounded-xl border border-gray-200 p-6 mb-4">
             <h2 className="font-semibold text-gray-900 mb-4">この記事で紹介したツール</h2>
             <div className="space-y-3">
               {relatedTools.map((tool) => (
@@ -88,6 +98,25 @@ export default async function ArticlePage({ params }: Props) {
                     )}
                     <span className="text-xs text-blue-600">詳細 →</span>
                   </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 関連比較ページ */}
+        {relatedVs.length > 0 && (
+          <div className="bg-white rounded-xl border border-gray-200 p-6">
+            <h2 className="font-semibold text-gray-900 mb-4">ツールを徹底比較する</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {relatedVs.map(({ slug, toolA, toolB }) => (
+                <Link
+                  key={slug}
+                  href={`/vs/${slug}`}
+                  className="flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:border-blue-200 hover:bg-blue-50 transition-colors"
+                >
+                  <span className="font-medium text-gray-900 text-sm">{toolA.name} vs {toolB.name}</span>
+                  <span className="text-xs text-blue-600 shrink-0">比較する →</span>
                 </Link>
               ))}
             </div>
