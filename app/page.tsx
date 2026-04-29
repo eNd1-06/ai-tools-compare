@@ -79,6 +79,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* ナビゲーション */}
+      <nav className="bg-white border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center gap-6 text-sm">
+          <Link href="/" className="font-bold text-blue-600">AIツール比較</Link>
+          <Link href="/vs" className="text-gray-600 hover:text-blue-600 transition-colors">ツール比較</Link>
+          <Link href="/articles" className="text-gray-600 hover:text-blue-600 transition-colors">記事</Link>
+          <Link href="/ranking" className="text-gray-600 hover:text-blue-600 transition-colors">ランキング</Link>
+          <Link href="/recommend" className="text-gray-600 hover:text-blue-600 transition-colors">おすすめ診断</Link>
+        </div>
+      </nav>
+
       {/* ヒーロー */}
       <header className="bg-gradient-to-br from-blue-600 to-blue-800 text-white">
         <div className="max-w-6xl mx-auto px-4 py-12">
